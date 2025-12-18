@@ -1,0 +1,176 @@
+name: playtech_transmitter_app
+description: "Playtech Transmitter App Ver Build App Devices & Resolutions "
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.5.0-113.0.dev <4.0.0"
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  bitsdojo_window: ^0.1.6
+  cupertino_icons: ^1.0.6
+  equatable: ^2.0.7
+  flutter:
+    sdk: flutter
+  flutter_acrylic: ^1.1.3
+  flutter_bloc: ^9.1.1
+  flutter_phoenix: ^1.1.1
+  get: ^4.7.2
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  http: ^1.4.0
+  intl: ^0.20.2
+  logger: ^2.5.0
+  media_kit: ^1.2.0
+  media_kit_libs_video: ^1.0.6
+  media_kit_video: ^1.3.0
+  rxdart: ^0.28.0
+  socket_io_client: ^2.0.3
+  video_player: ^2.9.0
+  video_player_media_kit: ^1.0.6
+  web_socket_channel: ^3.0.3
+  window_manager: ^0.4.3
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - asset/setting.json
+    - asset/font/
+    - asset/video/
+    - asset/video/led_wings/
+    - asset/video/led_wings/background/background.mp4
+    - asset/video/led_wings/hit/hit_v1.mp4
+    - asset/video/led_wings/countdown/countdown.mpg
+    - asset/video/led_wings/hit/hit.mp4
+    - asset/video/led_vms_2496x264/
+    - asset/video/led_stair/
+    - asset/video/led_stair/hotseat/
+    - asset/video/led_stair/background.mp4
+    - asset/video/led_stair/hit.mp4
+    - asset/video/led_stair/hotseat/777.mp4
+    - asset/video/led_stair/hotseat/1000.mp4
+    - asset/video/led_stair/hotseat/ppochi_300.mp4
+    - asset/video/led_stair/hotseat/ppochi_slot.mp4
+    - asset/video/led_stair/hotseat/ppochi_rl.mp4
+    - asset/video/led_stair/hotseat/888.mp4
+
+
+    - asset/video/led_curved/hotseat/
+    - asset/video/led_curved/background.mp4
+    - asset/video/led_curved/hit.mp4
+    - asset/video/led_curved/hotseat/777.mp4
+    - asset/video/led_curved/hotseat/1000.mp4
+    - asset/video/led_curved/hotseat/ppochi_300.mp4
+    - asset/video/led_curved/hotseat/ppochi_slot.mp4
+    - asset/video/led_curved/hotseat/ppochi_rl.mp4
+    - asset/video/led_curved/hotseat/888.mp4
+
+    - asset/video/led_marx/background.mp4
+
+    - asset/video/led_atm/background.mp4
+    - asset/video/led_lobby/background_lobby.mp4
+
+
+    - asset/video/count_down/hit_countdown_led.mp4
+    - asset/video/count_down/hit_countdown_led_vms.mp4
+    - asset/video/count_down/
+
+
+    - asset/video/led_atm/hit.mp4
+    - asset/video/led_atm/hit_old.mp4
+    
+    - asset/video/led_rl_floor2/background.mp4
+    - asset/video/led_rl_floor2/hit.mp4
+    
+    - asset/video/led_wings/background/background.mp4
+    - asset/video/led_wings/hit/hit.mp4
+    - asset/video/led_vms_2496x264/background/background_vms.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/888.mp4
+    - asset/video/led_vms_2496x264/hit/hit.mp4
+    - asset/video/led_vms_2496x264/hit/hit_v1.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/triple777.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/triple777.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/1000.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/ppochi.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/ppochi_rl.mp4
+    - asset/video/led_vms_2496x264/hit/hotseat/ppochi_slot.mp4
+    
+    - asset/video/led_floor3_mega/hit.mp4
+    - asset/video/led_floor3_mega/
+    - asset/video/led_floor3_mega/hit_360.mp4
+
+    - asset/video/led_non_smoke/background.mp4
+    - asset/video/led_non_smoke/hit.mp4
+    - asset/video/led_non_smoke/hotseat/
+    - asset/video/led_non_smoke/hotseat/ppochi.mp4
+    - asset/video/led_non_smoke/hotseat/777.mp4
+    - asset/video/led_non_smoke/hotseat/1000.mp4
+    - asset/video/led_non_smoke/hotseat/ppochi_rl.mp4
+    - asset/video/led_non_smoke/hotseat/ppochi_slot.mp4
+    - asset/video/led_floor2/background.mp4
+    - asset/video/led_floor2/hit.mp4
+    - asset/video/led_floor2/
+    - asset/video/led_floor2/countdown.mp4
+    - asset/video/count_down/hit_countdown_led.mp4
+
+    - asset/video/led_custom_tripledaily/hotseats/
+    - asset/video/led_custom_tripledaily/jackpots/
+    - asset/video/led_custom_tripledaily/hotseats/777.mpg
+    - asset/video/led_custom_tripledaily/hotseats/888.mpg
+    - asset/video/led_custom_tripledaily/hotseats/1000.mpg
+    - asset/video/led_custom_tripledaily/hotseats/ppochi.mpg
+    - asset/video/led_custom_tripledaily/hotseats/ppochi_rl.mpg
+    - asset/video/led_custom_tripledaily/hotseats/ppochi_slot.mpg
+    - asset/video/led_custom_tripledaily/hotseats/ppochi.mp4
+    - asset/video/led_custom_tripledaily/hotseats/ppochi_rl.mp4
+
+
+    - asset/video/led_custom_tripledaily/jackpots/countdown.mpg
+    - asset/video/led_custom_tripledaily/jackpots/daily.mpg
+    - asset/video/led_custom_tripledaily/jackpots/dailygolden.mpg
+    - asset/video/led_custom_tripledaily/jackpots/dozen.mpg
+    - asset/video/led_custom_tripledaily/jackpots/frequent.mpg
+    - asset/video/led_custom_tripledaily/jackpots/grand_rl.mpg
+    - asset/video/led_custom_tripledaily/jackpots/highlimit.mpg
+    - asset/video/led_custom_tripledaily/jackpots/major_rl.mpg
+    - asset/video/led_custom_tripledaily/jackpots/triple.mpg
+    - asset/video/led_custom_tripledaily/jackpots/vegas.mpg
+    - asset/video/led_custom_tripledaily/jackpots/vegas_rl.mpg
+    - asset/video/led_custom_tripledaily/jackpots/weekly.mpg
+    - asset/video/led_custom_tripledaily/background.mp4
+
+    - asset/video/led_floor3_mega_back/
+    - asset/video/led_floor3_mega_back/background.mp4
+    - asset/video/led_floor3_mega_back/background2.mov
+
+
+  fonts:
+    - family: SFPro
+      fonts:
+        - asset: asset/font/sf-pro-display/sfpro_medium.otf
