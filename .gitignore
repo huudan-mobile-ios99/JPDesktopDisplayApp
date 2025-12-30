@@ -119,4 +119,4 @@ asset/video
 # SYMBOLICATION / OBFUSCATION
 # ============================================
 app.*.symbols
-app.*.map.json
+app.*.map.json  
