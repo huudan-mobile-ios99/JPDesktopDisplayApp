@@ -35,10 +35,10 @@ class JackpotHitShowScreenHdLed1920x1080 extends StatelessWidget {
     //   );
 
 //  return const JackpotBackgroundVideoHitLedHD1920x1080StairF(
-//             id: '109',
+//             id: '119',
 //             number: '100',
 //             value: '0',
-//       );
+//   );
 
     //  return const JackpotBackgroundVideoHitLedHD1920x1080CurvedF(
     //         id: '0',
@@ -119,11 +119,11 @@ class JackpotHitShowScreenHdLed1920x1080 extends StatelessWidget {
           //   number: data.hitData!['machineNumber'].toString(),
           //   value: data.hitData!['amount'] == [] ? "0" : data.hitData!['amount'].toString(),
           // );
-          //  return JackpotBackgroundVideoHitLedHD1920x1080StairF(
-          //   id: data.hitData!['id'].toString(),
-          //   number: data.hitData!['machineNumber'].toString(),
-          //   value: data.hitData!['amount'] == [] ? "0" : data.hitData!['amount'].toString(),
-          // );
+           return JackpotBackgroundVideoHitLedHD1920x1080StairF(
+            id: data.hitData!['id'].toString(),
+            number: data.hitData!['machineNumber'].toString(),
+            value: data.hitData!['amount'] == [] ? "0" : data.hitData!['amount'].toString(),
+          );
           //  return JackpotBackgroundVideoHitLedHD1920x1080CurvedF(
           //   id: data.hitData!['id'].toString(),
           //   number: data.hitData!['machineNumber'].toString(),
@@ -144,11 +144,11 @@ class JackpotHitShowScreenHdLed1920x1080 extends StatelessWidget {
           //   number: data.hitData!['machineNumber'].toString(),
           //   value: data.hitData!['amount'] == [] ? "0" : data.hitData!['amount'].toString(),
           // );
-          return JackpotBackgroundVideoHitLedHD1920x1080NonSmoke(
-            id: data.hitData!['id'].toString(),
-            number: data.hitData!['machineNumber'].toString(),
-            value: data.hitData!['amount'] == [] ? "0" : data.hitData!['amount'].toString(),
-          );
+          // return JackpotBackgroundVideoHitLedHD1920x1080NonSmoke(
+          //   id: data.hitData!['id'].toString(),
+          //   number: data.hitData!['machineNumber'].toString(),
+          //   value: data.hitData!['amount'] == [] ? "0" : data.hitData!['amount'].toString(),
+          // );
         },
       ));
   }

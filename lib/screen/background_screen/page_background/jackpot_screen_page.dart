@@ -228,20 +228,20 @@ class JackpotOdometer extends StatelessWidget {
         //   hiveValue: hiveValue,
         //   isSmall: isSmall,
         // );
-        return GameOdometerChild2946x624(
-          startValue: values.startValue,
-          endValue: values.endValue,
-          nameJP: nameJP,
-          hiveValue: hiveValue,
-          isSmall: isSmall,
-        );
-        // return GameOdometerChildLed1920x1080(
+        // return GameOdometerChild2946x624(
         //   startValue: values.startValue,
         //   endValue: values.endValue,
         //   nameJP: nameJP,
         //   hiveValue: hiveValue,
         //   isSmall: isSmall,
         // );
+        return GameOdometerChildLed1920x1080(
+          startValue: values.startValue,
+          endValue: values.endValue,
+          nameJP: nameJP,
+          hiveValue: hiveValue,
+          isSmall: isSmall,
+        );
         
           // return GameOdometerChildLed1920x1080Curved(
           //           startValue: values.startValue,

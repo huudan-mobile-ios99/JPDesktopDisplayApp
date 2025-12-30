@@ -60,7 +60,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - asset/setting.json
+    - asset/video_new/
+    - assets/config/
     - asset/font/
     - asset/video/
     - asset/video/led_wings/

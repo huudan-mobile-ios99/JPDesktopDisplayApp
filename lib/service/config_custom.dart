@@ -843,7 +843,6 @@ class ConfigCustom {
       case '$levelVegasSpinJP': return tagVegasSpinJP;
       case '$levelGrandSpinJP': return tagGrandSpinJP;
       case '$levelMajorSpinJP': return tagMajorSpinJP;
-
       default:
       return null;
     }

@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
+import 'package:playtech_transmitter_app/service/jackpot_logger_service.dart';
 import 'package:playtech_transmitter_app/service/widget/text_style.dart';
 
 class JackpotBackgroundVideoHitLedHD1920x1080StairF extends StatefulWidget {
@@ -26,6 +28,9 @@ class _JackpotBackgroundVideoHitLedHD1920x1080StairFState extends State<JackpotB
   late final Player _player;
   late final VideoController _controller;
   final NumberFormat _numberFormat = NumberFormat('#,##0.00', 'en_US');
+  final JackpotConfigService _configService = JackpotConfigService();
+  final JackpotDisplayLogger _logger = JackpotDisplayLogger();
+
   String? _currentVideoPath;
   bool _isSwitching = false;
   bool _isInitialized = false;
@@ -35,62 +40,12 @@ class _JackpotBackgroundVideoHitLedHD1920x1080StairFState extends State<JackpotB
   final Map<String, Media> _mediaCache = {};
 
 
+  /// Get video path from setting.json ? hitVideos
   String getVideoAssetPath(String id) {
-    switch (id) {
-      case '0':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '1':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '2':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '3':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '4':
-       return ConfigCustom.jp_id_hit_all_ledstair;
-      case '44':
-       return ConfigCustom.jp_id_hit_all_ledstair;
-      case '46':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '34':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '35':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '45':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '48':
-        return ConfigCustom.jp_id_hit_all_ledstair; //New JP hightlimit
-      case '18':
-        return ConfigCustom.jp_id_hit_all_ledstair;
-      case '80': //tripple 777 price
-        return ConfigCustom.jp_id_777_1st_video_path_ledstair1920x1080;
-      case '81':
-        return ConfigCustom.jp_id_777_1st_video_path_ledstair1920x1080;
-      case '88': //1000 price jackpot town
-        return ConfigCustom.jp_id_1000_1st_video_path_ledstair1920x1080;
-      case '89':
-        return ConfigCustom.jp_id_1000_1st_video_path_ledstair1920x1080;
-      case '97': //ppochi video
-        return ConfigCustom.jp_id_ppochi_Mon_Fri_video_path_ledstair1920x1080;
-      case '98':
-        return ConfigCustom.jp_id_ppochi_Mon_Fri_video_path_ledstair1920x1080;
-      
-      case '109':
-        return ConfigCustom.jp_id_RL_ppochi_video_path_ledstair1920x1080;
-      case '119':
-        return ConfigCustom.jp_id_New_20_ppochi_video_path_ledstair1920x1080;
-      
-      case '121':
-        return ConfigCustom.jp_id_888_video_path_ledstair1920x1080;
-      case '122':
-        return ConfigCustom.jp_id_888_video_path_ledstair1920x1080;
-      case '123':
-        return ConfigCustom.jp_id_888_video_path_ledstair1920x1080;
-      
-      default:
-        return ConfigCustom.jp_id_hit_all_ledstair;
-    }
+    final String path = _configService.getHitVideoPathLedStair(id);
+    debugPrint('? Video Widget (Stair): getVideoAssetPath(id: $id) ? $path');
+    return path;
   }
-
   @override
   void initState() {
     super.initState();
@@ -187,6 +142,13 @@ class _JackpotBackgroundVideoHitLedHD1920x1080StairFState extends State<JackpotB
     } finally {
       _isSwitching = false;
     }
+    // ? LOG JACKPOT / HOTSEAT HIT
+    await _logger.logHit(
+      id: widget.id,
+      number: widget.number,
+      value: widget.value,
+      videoPath: videoPath,
+    );
   }
 
   @override

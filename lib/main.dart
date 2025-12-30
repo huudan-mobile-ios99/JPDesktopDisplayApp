@@ -12,6 +12,7 @@ import 'package:playtech_transmitter_app/screen/background_screen/page_backgroun
 import 'package:playtech_transmitter_app/screen/background_screen/page_background/jackpot_screen_page__hd_1920x1080_RL_FLOOR2.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/page_background/jackpot_video_bg_page.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/page_background/jackpot_video_bg_page_no_delay.dart';
+import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackpot_asset_config.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackpot_hit_page_custom_hdled_1920x1080_TRIPLEDAILY.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackpot_hit_page_hdled_1920x1080.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackpot_hit_page_hdled_1920x1080Floor2.dart';
@@ -25,6 +26,7 @@ import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackp
 import 'package:playtech_transmitter_app/service/hive_service/jackpot_hive_service.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc_jp_price/main/jackpot_price_bloc.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc_socket_time/jackpot_bloc_socket.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc/video_bloc.dart';
@@ -34,6 +36,7 @@ import 'package:media_kit/media_kit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await JackpotConfigService().initialize();
   MediaKit.ensureInitialized();
 
   // Load Hive BEFORE everything
@@ -58,13 +61,13 @@ Future<void> main() async {
         // ConfigCustom.fixHeight, //LED WINGS
         // ConfigCustom.fixWidth_table,
         // ConfigCustom.fixHeight_table
-        ConfigCustom.fixWidth_led_vms,
-        ConfigCustom.fixHeight_led_vms
+        // ConfigCustom.fixWidth_led_vms,
+        // ConfigCustom.fixHeight_led_vms
         // ConfigCustom.fixWidth_HD_led_lobby,
         // ConfigCustom.fixHeight_HD_led_lobby
 
-        // ConfigCustom.fixWidth_HD_led_stair,
-        // ConfigCustom.fixHeight_HD_led_stair,
+        ConfigCustom.fixWidth_HD_led_stair,
+        ConfigCustom.fixHeight_HD_led_stair,
 
         // ConfigCustom.fixWidth_HD_led_RL_Floor2,
         // ConfigCustom.fixHeight_HD_led_RL_Floor2,
@@ -207,13 +210,14 @@ class MyAppBodyState extends State<MyAppBody> with WindowListener {
 
               //  RepaintBoundary(child: JackpotHitShowScreen5200x1664Led3MegaNoBG()), //LED MEGA FLOOR 3 NO BACKGROUND VIDEO HIT 
 
-              // RepaintBoundary(child: JackpotHitShowScreenHdLed1920x1080()), 
+              RepaintBoundary(child: JackpotHitShowScreenHdLed1920x1080()), 
+              JackpotConfigPageView()
               // RepaintBoundary(child: JackpotHitShowScreenCustomHdLed1920x1080TripleDaily()), //CUSTOM TRIPLE DAILY SHOW HIT 
 
               
 
               // RepaintBoundary(child: JackpotHitShowScreenHdLedWings()), //LED WINGS SHOW HIT
-              RepaintBoundary(child: JackpotHitShowScreen2496x624VMS()), //LED VMS SHOW HIT
+              // RepaintBoundary(child: JackpotHitShowScreen2496x624VMS()), //LED VMS SHOW HIT
 
                            
               //  RepaintBoundary(child: JackpotHitShowScreen1920x1080LedRLFloor2()), //LED RL FLoor2 NEW 

@@ -2,21 +2,21 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:playtech_transmitter_app/service/socket_service/socket_service.dart';
 import 'jackpot_event_socket.dart';
 import 'jackpot_state_socket.dart';
 
 class JackpotBloc2 extends Bloc<JackpotEvent2, JackpotState2> {
   final SocketService _socketService;
+  final JackpotConfigService _configService = JackpotConfigService(); // Singleton
   Timer? _imagePageTimer;
   StreamSubscription<bool>? _connectionSubscription;
   StreamSubscription<Map<String, dynamic>>? _hitSubscription;
   StreamSubscription<Map<String, dynamic>>? _initialConfigSubscription;
   StreamSubscription<Map<String, dynamic>>? _updatedConfigSubscription;
 
-  JackpotBloc2({SocketService? socketService})
-      : _socketService = socketService ?? SocketService(),
-      super(const JackpotState2()) {
+  JackpotBloc2({SocketService? socketService}) : _socketService = socketService ?? SocketService(),super(const JackpotState2()) {
 
     on<JackpotConnect>(_onConnect);
     on<JackpotDisconnect>(_onDisconnect);
@@ -59,47 +59,18 @@ class JackpotBloc2 extends Bloc<JackpotEvent2, JackpotState2> {
     });
   }
 
-  // Duration configuration matching JackpotBackgroundVideoHitLedHD1920x1080
-  final Map<String, int> _durationConfig = {
-    '0': 29, // frequent
-    '1': 45, // daily
-    '2': 39, // dozen
-    '3': 42, // weekly
-    '4': 45, // vegas
-    '18': 30, // highlimit
-    '35': 37, // 36+1 daily golden
-    '34': 40, // 39+1 daily golden
-    '45': 30, // highlimit
-    '48': 30, // HigHLimit NEW  ---  (APPLIED CURRENT)
-    '46': 43, // 42+1monthly
-    '80': 29, //28+1 triple 777 price
-    '81': 29, //tripple 777
-    '88': 15, //14+1 1000 price jackpot town
-    '89': 15,// 1000 price jackpot town
-    '97': 11, // 10+1 ppochi video
-    '98': 11, // 10+1ppochi video
-    '109': 22,// 21+1 rl video
-    '119': 21,// 20+1slot video,
-    '121': 24,// 888 price
-    '122': 24,// 888 price
-    '123': 24,// 888 price
-    '43':20, // roulette vegas spin jp
-    '40':20, // roulette grand spin jp
-    '41':20, // roulette major spin jp
-  };
-  // Jackpot IDs that require countdown video
-  final List<String> _countdownIds = ['3', '4', '46','48']; // VEGAS WEEKLY , MONTHLY & NEW HIGH LIMIT
-
+  // Dynamic timer using setting.json ? durations
   void _startDisplayTimer(String hitId) {
     _imagePageTimer?.cancel();
-    final duration = _durationConfig.containsKey(hitId)
-        ? Duration(seconds: _durationConfig[hitId]!)
-        : const Duration(seconds: ConfigCustom.durationTimerVideoHitShow_Jackpot);
+
+    final durationSeconds = _configService.getDuration(hitId);
+    final Duration duration = Duration(seconds: durationSeconds);
     debugPrint('JackpotBloc2: Starting timer for jackpot ID: $hitId, duration: ${duration.inSeconds} seconds');
     _imagePageTimer = Timer(duration, () {
       add(JackpotHideImagePage());
     });
   }
+  // Dynamic timer using setting.json ? durations
 
   Future<void> _onConnect(JackpotConnect event, Emitter<JackpotState2> emit) async {
     debugPrint('JackpotBloc2: Connected to Socket.IO server');
@@ -139,13 +110,15 @@ class JackpotBloc2 extends Bloc<JackpotEvent2, JackpotState2> {
     emit(state.copyWith(error: event.error));
   }
 
+  // Dynamic timer using setting.json ? durations
   Future<void> _onHitReceived(JackpotHitReceived event, Emitter<JackpotState2> emit) async {
     debugPrint('JackpotBloc2: Received hit for jackpot ID: ${event.hit['id']}, data: ${event.hit}');
     final hitId = event.hit['id']?.toString() ?? event.hit['jackpotId']?.toString() ?? 'unknown';
     debugPrint('JackpotBloc2: Extracted hitId: $hitId');
     final updatedHits = List<Map<String, dynamic>>.from(state.hits)..add(event.hit);
 
-    final requiresCountdown = _countdownIds.contains(hitId);
+    // Use config service for countdown check
+    final bool requiresCountdown = _configService.requiresCountdown(hitId);
 
     if (state.showImagePage) {
       final updatedQueue = List<Map<String, dynamic>>.from(state.hitQueue ?? [])..add(event.hit);
@@ -166,6 +139,7 @@ class JackpotBloc2 extends Bloc<JackpotEvent2, JackpotState2> {
       ));
     }
   }
+  // Dynamic timer using setting.json ? durations
 
   Future<void> _onCountdownCompleted(JackpotCountdownCompleted event, Emitter<JackpotState2> emit) async {
     debugPrint('JackpotBloc2: Countdown completed, switching to main video');
@@ -199,7 +173,7 @@ class JackpotBloc2 extends Bloc<JackpotEvent2, JackpotState2> {
       final nextHit = state.hitQueue!.first;
       final hitId = nextHit['id']?.toString() ?? nextHit['jackpotId']?.toString() ?? 'unknown';
       final updatedQueue = List<Map<String, dynamic>>.from(state.hitQueue!)..removeAt(0);
-      final requiresCountdown = _countdownIds.contains(hitId);
+      final bool requiresCountdown = _configService.requiresCountdown(hitId);
 
       debugPrint('JackpotBloc2: Hiding current video, displaying next queued hit for jackpot ID: $hitId, remaining queue length: ${updatedQueue.length}');
       emit(state.copyWith(

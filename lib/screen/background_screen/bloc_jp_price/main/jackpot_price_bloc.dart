@@ -36,26 +36,12 @@ class JackpotPriceBloc extends Bloc<JackpotPriceEvent, JackpotPriceState> {
   }
 
   Future<void> _initialize() async {
-    // try {
-    //   // Record the start time when initialization begins
-    //   _startTime = DateTime.now();
-    //   debugPrint('JackpotPriceBloc: Initialization started at $_startTime');
-    //   await hiveService.initHive();
-    //   debugPrint('JackpotPriceBloc: Hive initialized successfully');
-    //   _socketService.initialize();
-    //   _startFreshnessCheck();
-    //   _listenToSocketEvents();
-    // } catch (e) {
-    //   // debugPrint('JackpotPriceBloc: Failed to initialize Hive: $e');
-    //   emit(state.copyWith(error: 'Failed to initialize Hive: $e'));
-    // }
     try {
       // Record the start time when initialization begins
       _startTime = DateTime.now();
-      // debugPrint('JackpotPriceBloc: Initialization started at $_startTime');
+      debugPrint('JackpotPriceBloc: Initialization started at $_startTime');
       await hiveService.initHive();
-      // debugPrint('JackpotPriceBloc: Hive initialized successfully');
-
+      debugPrint('JackpotPriceBloc: Hive initialized successfully');
       // PRE-LOAD LAST SAVED VALUES INTO BLOC STATE
       final history = await hiveService.getJackpotHistory();
       if (history.isNotEmpty) {
@@ -148,22 +134,13 @@ class JackpotPriceBloc extends Bloc<JackpotPriceEvent, JackpotPriceState> {
       // debugPrint('JackpotPriceBloc: Updated $key: previous=$currentValue, current=$value');
     }
 
-    // if (batchToSave.isNotEmpty) {
-    //   try {
-    //     hiveService.appendJackpotHistory(batchToSave);
-    //     debugPrint('JackpotPriceBloc: Saved to Hive: $batchToSave, Previous: $previousJackpotValues');
-    //   } catch (e) {
-    //     // debugPrint('JackpotPriceBloc: Failed to save to Hive: $e');
-    //   }
-    // }
-
     // Save FULL current state every time ? even if only 1 value changed
     if (jackpotValues.isNotEmpty) {
       try {
         hiveService.saveFullJackpotState(jackpotValues);
         // debugPrint('JackpotPriceBloc: FULL STATE saved to Hive (${jackpotValues.length} jackpots)');
       } catch (e) {
-        // debugPrint('JackpotPriceBloc: Failed to save full state to Hive: $e');
+        debugPrint('JackpotPriceBloc: Failed to save full state to Hive: $e');
       }
     }
 

@@ -39,8 +39,8 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
   bool _isSwitching = false;
   int _retryCount = 0;
   static const int _maxRetries = 10;
-  final Media _media1 = Media('asset://${ConfigCustom.videoBackgroundScreenLedVMS_2496x264}');
-  final Media _media2 = Media('asset://${ConfigCustom.videoBackgroundScreenLedVMS_2496x264}');
+  final Media _media1 = Media('asset://${ConfigCustom.videoBackgroundScreenLedStair_1920x1080}');
+  final Media _media2 = Media('asset://${ConfigCustom.videoBackgroundScreenLedStair_1920x1080}');
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
 
     // Load initial video
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadVideo(ConfigCustom.videoBackgroundScreenLedVMS_2496x264);
+      _loadVideo(ConfigCustom.videoBackgroundScreenLedStair_1920x1080);
     });
 
     // Handle errors
@@ -72,7 +72,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
         });
         Future.delayed(const Duration(milliseconds: 10), () {
           if (mounted) {
-            _loadVideo(_currentVideoPath ?? ConfigCustom.videoBackgroundScreenLedVMS_2496x264);
+            _loadVideo(_currentVideoPath ?? ConfigCustom.videoBackgroundScreenLedStair_1920x1080);
           }
         });
       }
@@ -109,7 +109,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
       await Future.delayed( const Duration(milliseconds: 1500)); // Delay to stabilize libmpv| 1.5s 
 
       _currentVideoPath = videoPath;
-      final media = videoPath == ConfigCustom.videoBackgroundScreenLedVMS_2496x264 ? _media1 : _media2;
+      final media = videoPath == ConfigCustom.videoBackgroundScreenLedStair_1920x1080 ? _media1 : _media2;
       await _player.open(media, play: false);
       await _player.setVolume(0.0);
       await _player.play();
@@ -181,7 +181,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
                             ),
                           )
                         : circularProgessCustom(),
-                    // const RepaintBoundary(child: JackpotDisplayScreenLedHD1920x1080()),
+                    const RepaintBoundary(child: JackpotDisplayScreenLedHD1920x1080()),
 
                     // const RepaintBoundary(child: JackpotDisplayScreenLedLobbyHD1080x1920()),
                     // const RepaintBoundary(child: JackpotDisplayScreenLedRLFloor2HD()), //BANK END 
@@ -191,7 +191,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
                     // const RepaintBoundary(child: JackpotDisplayScreenLedCustomTripleDaily()), //LED Custom Triple & Daily
                     // const RepaintBoundary(child: JackpotDisplayScreen1920x1080Floor3MegaBack()), //LED MEGA 3 FLOOR -BACK
                     // const RepaintBoundary(child: JackpotDisplayScreen()), // LED WINGS DISPLAY 
-                    const RepaintBoundary(child: JackpotDisplayScreen2496x624()),
+                    // const RepaintBoundary(child: JackpotDisplayScreen2496x624()),
                     // const RepaintBoundary(child: JackpotDisplayScreenLedHD1920x1080()),
 
               

@@ -56,23 +56,21 @@ class _JackpotDisplayScreenLedHD1920x1080State extends State<JackpotDisplayScree
                   previous.jackpotValues != current.jackpotValues ||
                   previous.previousJackpotValues != current.previousJackpotValues,
               builder: (context, priceState) {
-                debugPrint('Building JackpotDisplayScreenLedHD1920x1080:${priceState.hasData}');
+                // debugPrint('Building JackpotDisplayScreenLedHD1920x1080:${priceState.hasData}');
                 return Center(
                   child: priceState.isConnected
                       ?  SizedBox(
                           width: ConfigCustom.fixWidth_HD_led_curved,
                           height: ConfigCustom.fixWidth_HD_led_curved,
                           child:
-                           screenLedNonSmoke(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
+                          //  screenLedNonSmoke(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                           // screenLedFloor2(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                           //  screenLedATM(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
-                            // screenLedStair(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
+                            screenLedStair(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                             // screenLedCurved(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                             // screenLedMarX(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                             // screenLedMarXNEW(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                             // screenLedNonSmoke(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
-
-
                         )
                       :
                       priceState.error != null ? Container() : circularProgessCustom()
