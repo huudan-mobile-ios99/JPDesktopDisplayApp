@@ -861,7 +861,6 @@ static const List<String> selectedJackpotNames = [
     'HighLimit',
     'HighLimitNew',
     'Monthly',
-
   ];
 
 
@@ -954,7 +953,6 @@ static const List<String> selectedJackpotNames = [
     // 98: '600',
     // 109: '300',
     109: '600',
-
     119: '500',
   };//APPLY FOR ALL HOTSEATS
 

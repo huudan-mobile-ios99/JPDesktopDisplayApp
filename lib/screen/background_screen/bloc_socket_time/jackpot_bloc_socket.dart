@@ -83,7 +83,6 @@ class JackpotBloc2 extends Bloc<JackpotEvent2, JackpotState2> {
     '121': 24,// 888 price
     '122': 24,// 888 price
     '123': 24,// 888 price
-
     '43':20, // roulette vegas spin jp
     '40':20, // roulette grand spin jp
     '41':20, // roulette major spin jp
