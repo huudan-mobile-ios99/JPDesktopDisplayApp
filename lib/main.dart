@@ -211,7 +211,7 @@ class MyAppBodyState extends State<MyAppBody> with WindowListener {
               //  RepaintBoundary(child: JackpotHitShowScreen5200x1664Led3MegaNoBG()), //LED MEGA FLOOR 3 NO BACKGROUND VIDEO HIT 
 
               RepaintBoundary(child: JackpotHitShowScreenHdLed1920x1080()), 
-              JackpotConfigPageView()
+              // JackpotConfigPageView()
               // RepaintBoundary(child: JackpotHitShowScreenCustomHdLed1920x1080TripleDaily()), //CUSTOM TRIPLE DAILY SHOW HIT 
 
               
