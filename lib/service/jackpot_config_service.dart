@@ -92,6 +92,66 @@ class JackpotConfigService {
         videos['default']?.toString() ??
         'asset/video/led_stair/hit.mp4';
   }
+  //MARX
+  String getHitVideoPathLedMarX(String id) {
+    final videos = _config?['hitVideosLedMarX'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_atm/hit.mp4';
+  }
+  //ATM
+  String getHitVideoPathLedATM(String id) {
+    final videos = _config?['hitVideosLedATM'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_atm/hit.mp4';
+  }
+  //CURVED
+  String getHitVideoPathLedCurved(String id) {
+    final videos = _config?['hitVideosLedCurved'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_curved/hit.mp4';
+  }
+
+  //NONSMOKE
+  String getHitVideoPathLedNonSmoke(String id) {
+    final videos = _config?['hitVideosLedNonSmoke'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_non_smoke/hit.mp4';
+  }
+   //BankEnd
+  String getHitVideoPathLedBankEnd(String id) {
+    final videos = _config?['hitVideosLedBankEnd'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_non_smoke/hit.mp4';
+  }
+
+
+
+  String getHitVideoPathLedCustom(String id) {
+    final videos = _config?['hitVideosLedCustom'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_stair/hit.mp4';
+  }
+
+  String getHitVideoPathLedWings(String id) {
+    final videos = _config?['hitVideosLedWings'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_wings/hit/hit.mp4';
+  }
+  String getHitVideoPathLedVMS(String id) {
+    final videos = _config?['hitVideosLedVMS'] as Map<String, dynamic>? ?? {};
+    return videos[id]?.toString() ??
+        videos['default']?.toString() ??
+        'asset/video/led_vms_2496x264/hit/hit.mp4';
+  }
+
+
 
   int getDuration(String id) {
     final durations = _config?['durations'] as Map<String, dynamic>? ?? {};

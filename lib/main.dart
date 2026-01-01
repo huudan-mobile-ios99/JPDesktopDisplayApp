@@ -166,7 +166,7 @@ class MyAppBodyState extends State<MyAppBody> with WindowListener {
         BlocProvider(create: (context) => JackpotPriceBloc(), lazy: false),
         BlocProvider(
           create: (context) => VideoBloc(
-            videoBg: ConfigCustom.videoBackgroundScreenLedVMS_2496x264,
+            videoBg: ConfigCustom.videoBackgroundScreenLedFloor2,
             context: context,
           ),
           lazy: false,

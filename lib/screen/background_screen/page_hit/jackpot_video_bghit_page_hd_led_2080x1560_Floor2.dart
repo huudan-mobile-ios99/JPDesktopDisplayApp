@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:playtech_transmitter_app/service/widget/text_style.dart';
 
 class JackpotBackgroundVideoHit1920x1080Floor2 extends StatefulWidget {
@@ -35,54 +36,61 @@ class _JackpotBackgroundVideoHit1920x1080Floor2State extends State<JackpotBackgr
   final Map<String, Media> _mediaCache = {};
 
 
+final  JackpotConfigService _configService = JackpotConfigService();
+  /// Get video path from setting.json ? hitVideos
   String getVideoAssetPath(String id) {
-    switch (id) {
-      case '0':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '1':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '2':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '3':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '4':
-       return ConfigCustom.videoHitScreenLedFloor2;
-      case '44':
-       return ConfigCustom.videoHitScreenLedFloor2;
-      case '46':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '34':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '35':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '45':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '48':
-        return ConfigCustom.videoHitScreenLedFloor2; //New JP hightlimit
-      case '41'://MAJOR SPIN
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '18':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '80': //tripple 777 price
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '81':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '88': //1000 price jackpot town
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '89':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '97': //ppochi video
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '98':
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '109'://ppochi RL
-        return ConfigCustom.videoHitScreenLedFloor2;
-      case '119'://ppochi SLOT
-        return ConfigCustom.videoHitScreenLedFloor2;
-      default:
-        return ConfigCustom.videoHitScreenLedFloor2;
-    }
+    final String path = _configService.getHitVideoPathLedBankEnd(id);
+    debugPrint('? Video Widget (Stair): getVideoAssetPath(id: $id) ? $path');
+    return path;
   }
+  // String getVideoAssetPath(String id) {
+  //   switch (id) {
+  //     case '0':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '1':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '2':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '3':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '4':
+  //      return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '44':
+  //      return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '46':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '34':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '35':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '45':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '48':
+  //       return ConfigCustom.videoHitScreenLedFloor2; //New JP hightlimit
+  //     case '41'://MAJOR SPIN
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '18':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '80': //tripple 777 price
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '81':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '88': //1000 price jackpot town
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '89':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '97': //ppochi video
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '98':
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '109'://ppochi RL
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     case '119'://ppochi SLOT
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //     default:
+  //       return ConfigCustom.videoHitScreenLedFloor2;
+  //   }
+  // }
 
   @override
   void initState() {

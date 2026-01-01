@@ -64,12 +64,12 @@ class _JackpotDisplayScreenLedHD1920x1080State extends State<JackpotDisplayScree
                           height: ConfigCustom.fixWidth_HD_led_curved,
                           child:
                           //  screenLedNonSmoke(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
-                          // screenLedFloor2(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
+                          screenLedFloor2(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                           //  screenLedATM(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
-                            screenLedStair(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
+                            // screenLedStair(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                             // screenLedCurved(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                             // screenLedMarX(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
-                            // screenLedMarXNEW(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
+                            // screenLedMarXNEW(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues), // ADD 1 MORE PRICE 
                             // screenLedNonSmoke(context, hiveValues,priceState.previousJackpotValues,priceState.jackpotValues),
                         )
                       :

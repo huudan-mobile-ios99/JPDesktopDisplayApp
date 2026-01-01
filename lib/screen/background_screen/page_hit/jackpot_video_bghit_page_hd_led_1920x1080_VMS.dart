@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:playtech_transmitter_app/service/widget/text_style.dart';
 
 class JackpotBackgroundVideoHitLedHD1920x1080VMS_F extends StatefulWidget {
@@ -26,6 +27,8 @@ class _JackpotBackgroundVideoHitLedHD1920x1080VMS_FState extends State<JackpotBa
   late final Player _player;
   late final VideoController _controller;
   final NumberFormat _numberFormat = NumberFormat('#,##0.00', 'en_US');
+  final JackpotConfigService _configService = JackpotConfigService();
+
   String? _currentVideoPath;
   bool _isSwitching = false;
   bool _isInitialized = false;
@@ -34,110 +37,115 @@ class _JackpotBackgroundVideoHitLedHD1920x1080VMS_FState extends State<JackpotBa
   static const int _maxRetries = 10;
   final Map<String, Media> _mediaCache = {};
 
-
+/// Get video path from setting.json ? hitVideos
   String getVideoAssetPath(String id) {
-    // switch (id) {
-    //   case '0':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '1':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '2':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '3':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '4':
-    //    return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '44':
-    //    return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '46':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '34':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '35':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '45':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '48':
-    //     return ConfigCustom.jp_id_hit_all_2946x624; //New JP hightlimit
-    //   case '18':
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    //   case '80': //tripple 777 price _2946x624
-    //     return ConfigCustom.jp_id_777_1st_video_path_2946x624;
-    //   case '81':
-    //     return ConfigCustom.jp_id_777_1st_video_path_2946x624;
-    //   case '88': //1000 price jackpot town
-    //     return ConfigCustom.jp_id_1000_1st_video_path_2946x624;
-    //   case '89':
-    //     return ConfigCustom.jp_id_1000_1st_video_path_2946x624;
-    //   case '97': //ppochi video
-    //     return ConfigCustom.jp_id_ppochi_Mon_Fri_video_path_2946x624;
-    //   case '98':
-    //     return ConfigCustom.jp_id_ppochi_Mon_Fri_video_path_2946x624;
-    //   case '109'://rl 
-    //     return ConfigCustom.jp_id_RL_ppochi_video_path_2946x624;
-    //   case '119'://slot new
-    //     return ConfigCustom.jp_id_New_20_ppochi_video_path_2946x624;
-    //   case '121'://888 price
-    //     return ConfigCustom.jp_id_888_video_path_2946x624;
-    //   case '122':
-    //     return ConfigCustom.jp_id_888_video_path_2946x624;
-    //   case '123':
-    //     return ConfigCustom.jp_id_888_video_path_2946x624;
-    //   default: 
-    //     return ConfigCustom.jp_id_hit_all_2946x624;
-    // }
-
-    switch (id) {
-      case '0':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '1':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '2':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '3':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '4':
-       return ConfigCustom.jp_id_hit_all_2946x624;
-      case '44':
-       return ConfigCustom.jp_id_hit_all_2946x624;
-      case '46':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '34':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '35':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '45':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '48':
-        return ConfigCustom.jp_id_hit_all_2946x624; //New JP hightlimit
-      case '18':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '80': //tripple 777 price _2946x624
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '81':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '88': //1000 price jackpot town
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '89':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '97': //ppochi video
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '98':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '109'://rl 
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '119'://slot new
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '121'://888 price
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '122':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      case '123':
-        return ConfigCustom.jp_id_hit_all_2946x624;
-      default: 
-        return ConfigCustom.jp_id_hit_all_2946x624;
-    }
+    final String path = _configService.getHitVideoPathLedVMS(id);
+    debugPrint('? Video Widget (Stair): getVideoAssetPath(id: $id) ? $path');
+    return path;
   }
+  // String getVideoAssetPath(String id) {
+  //   // switch (id) {
+  //   //   case '0':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '1':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '2':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '3':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '4':
+  //   //    return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '44':
+  //   //    return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '46':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '34':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '35':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '45':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '48':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624; //New JP hightlimit
+  //   //   case '18':
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   //   case '80': //tripple 777 price _2946x624
+  //   //     return ConfigCustom.jp_id_777_1st_video_path_2946x624;
+  //   //   case '81':
+  //   //     return ConfigCustom.jp_id_777_1st_video_path_2946x624;
+  //   //   case '88': //1000 price jackpot town
+  //   //     return ConfigCustom.jp_id_1000_1st_video_path_2946x624;
+  //   //   case '89':
+  //   //     return ConfigCustom.jp_id_1000_1st_video_path_2946x624;
+  //   //   case '97': //ppochi video
+  //   //     return ConfigCustom.jp_id_ppochi_Mon_Fri_video_path_2946x624;
+  //   //   case '98':
+  //   //     return ConfigCustom.jp_id_ppochi_Mon_Fri_video_path_2946x624;
+  //   //   case '109'://rl 
+  //   //     return ConfigCustom.jp_id_RL_ppochi_video_path_2946x624;
+  //   //   case '119'://slot new
+  //   //     return ConfigCustom.jp_id_New_20_ppochi_video_path_2946x624;
+  //   //   case '121'://888 price
+  //   //     return ConfigCustom.jp_id_888_video_path_2946x624;
+  //   //   case '122':
+  //   //     return ConfigCustom.jp_id_888_video_path_2946x624;
+  //   //   case '123':
+  //   //     return ConfigCustom.jp_id_888_video_path_2946x624;
+  //   //   default: 
+  //   //     return ConfigCustom.jp_id_hit_all_2946x624;
+  //   // }
+
+  //   switch (id) {
+  //     case '0':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '1':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '2':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '3':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '4':
+  //      return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '44':
+  //      return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '46':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '34':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '35':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '45':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '48':
+  //       return ConfigCustom.jp_id_hit_all_2946x624; //New JP hightlimit
+  //     case '18':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '80': //tripple 777 price _2946x624
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '81':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '88': //1000 price jackpot town
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '89':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '97': //ppochi video
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '98':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '109'://rl 
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '119'://slot new
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '121'://888 price
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '122':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     case '123':
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //     default: 
+  //       return ConfigCustom.jp_id_hit_all_2946x624;
+  //   }
+  // }
 
   @override
   void initState() {

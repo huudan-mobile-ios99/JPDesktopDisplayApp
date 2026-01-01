@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:playtech_transmitter_app/service/widget/text_style.dart';
 
 class JackpotBackgroundVideoHit2080x1560LedWings extends StatefulWidget {
@@ -26,6 +27,8 @@ class _JackpotBackgroundVideoHit2080x1560LedWingsState extends State<JackpotBack
   late final Player _player;
   late final VideoController _controller;
   final NumberFormat _numberFormat = NumberFormat('#,##0.00', 'en_US');
+  final  JackpotConfigService _configService = JackpotConfigService();
+
   String? _currentVideoPath;
   bool _isSwitching = false;
   bool _isInitialized = false;
@@ -35,60 +38,12 @@ class _JackpotBackgroundVideoHit2080x1560LedWingsState extends State<JackpotBack
   final Map<String, Media> _mediaCache = {};
 
 
+  
+  /// Get video path from setting.json ? hitVideos
   String getVideoAssetPath(String id) {
-    switch (id) {
-      case '0':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '1':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '2':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '3':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '4':
-       return ConfigCustom.videoHitScreenLedWingsAll;
-      case '44':
-       return ConfigCustom.videoHitScreenLedWingsAll;
-      case '46':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '34':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '35':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '45':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      
-      case '48':
-        return ConfigCustom.videoHitScreenLedWingsAll; //New JP hightlimit
-      case '41'://MAJOR SPIN
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '18':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '80': //tripple 777 price
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '81':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '88': //1000 price jackpot town
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '89':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '97': //ppochi video
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '98':
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '109'://ppochi RL
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '119'://ppochi SLOT
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '121'://ppochi SLOT
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '122'://ppochi SLOT
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      case '123'://ppochi SLOT
-        return ConfigCustom.videoHitScreenLedWingsAll;
-      default:
-        return ConfigCustom.videoHitScreenLedWingsAll;
-    }
+    final String path = _configService.getHitVideoPathLedWings(id);
+    debugPrint('? Video Widget (Stair): getVideoAssetPath(id: $id) ? $path');
+    return path;
   }
 
   @override

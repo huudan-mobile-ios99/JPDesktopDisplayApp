@@ -6,6 +6,7 @@ import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackp
 
 import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackpot_video_bghit_page_hd_led_2080x1560_LedWings.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:playtech_transmitter_app/service/widget/circlar_progress.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc_socket_time/jackpot_bloc_socket.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc_socket_time/jackpot_state_socket.dart';
@@ -18,7 +19,7 @@ class JackpotHitShowScreenHdLed1920x1080Floor2 extends StatelessWidget {
   Widget build(BuildContext context) {
 
     // return JackpotBackgroundVideoHit1920x1080Floor2(
-    //         id: '97',
+    //         id: '124',
     //         number: '123',
     //         value: '0'
     // );
@@ -72,18 +73,31 @@ class JackpotHitShowScreenHdLed1920x1080Floor2 extends StatelessWidget {
                 child: const JackpotCountdownVideo());
             }
             
-            final hitId = int.tryParse(data.hitData!['id'].toString()) ?? -1;
-            if (ConfigCustom.defaultJackpotValues.containsKey(hitId)) {
-              data.hitData!['amount'] = ConfigCustom.defaultJackpotValues[hitId];
-              debugPrint('Applied default value ${ConfigCustom.defaultJackpotValues[hitId]} for ID: $hitId');
-            }
+            // final hitId = int.tryParse(data.hitData!['id'].toString()) ?? -1;
+            // if (ConfigCustom.defaultJackpotValues.containsKey(hitId)) {
+            //   data.hitData!['amount'] = ConfigCustom.defaultJackpotValues[hitId];
+            //   debugPrint('Applied default value ${ConfigCustom.defaultJackpotValues[hitId]} for ID: $hitId');
+            // }
             
-             return JackpotBackgroundVideoHit1920x1080Floor2(
+            //  return JackpotBackgroundVideoHit1920x1080Floor2(
+            //   id: data.hitData!['id'].toString(),
+            //   number: data.hitData!['machineNumber'].toString(),
+            //   value: ConfigCustom.defaultJackpotValues.containsKey(hitId) ? ConfigCustom.defaultJackpotValues[hitId].toString() : data.hitData!['amount']
+            // );
+            final int hitId = int.tryParse(data.hitData!['id'].toString()) ?? -1;
+            // Read from setting.json
+            final String? defaultValue = JackpotConfigService().getDefaultHotSeatValue(hitId.toString());
+
+            if (defaultValue != null) {
+              data.hitData!['amount'] = defaultValue;
+              debugPrint('Applied default value $defaultValue for ID: $hitId');
+            }
+            return JackpotBackgroundVideoHit1920x1080Floor2(
               id: data.hitData!['id'].toString(),
               number: data.hitData!['machineNumber'].toString(),
-              value: ConfigCustom.defaultJackpotValues.containsKey(hitId) ? ConfigCustom.defaultJackpotValues[hitId].toString() : data.hitData!['amount']
-      
+              value: defaultValue ?? data.hitData!['amount'].toString(),
             );
+
           },
           
         )),

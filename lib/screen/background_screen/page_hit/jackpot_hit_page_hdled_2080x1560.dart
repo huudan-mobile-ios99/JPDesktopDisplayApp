@@ -5,6 +5,7 @@ import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackp
 
 import 'package:playtech_transmitter_app/screen/background_screen/page_hit/jackpot_video_bghit_page_hd_led_2080x1560_LedWings.dart';
 import 'package:playtech_transmitter_app/service/config_custom.dart';
+import 'package:playtech_transmitter_app/service/jackpot_config_service.dart';
 import 'package:playtech_transmitter_app/service/widget/circlar_progress.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc_socket_time/jackpot_bloc_socket.dart';
 import 'package:playtech_transmitter_app/screen/background_screen/bloc_socket_time/jackpot_state_socket.dart';
@@ -15,14 +16,17 @@ class JackpotHitShowScreenHdLedWings extends StatelessWidget {
   const JackpotHitShowScreenHdLedWings({super.key});
   @override
   Widget build(BuildContext context) {
+    final JackpotConfigService configService = JackpotConfigService();
+
 
     // return JackpotBackgroundVideoHit2080x1560LedWings(
-    //         id: '0',
+    //         id: '121',
     //         number: '1234',
-    //         value: '1300'
+    //         value: '0'
     // );
+    
 
-    return Container(
+    return  SizedBox(
       width: ConfigCustom.fixWidth,
       height:ConfigCustom.fixHeight,
       // color:Colors.black,
@@ -61,6 +65,7 @@ class JackpotHitShowScreenHdLedWings extends StatelessWidget {
             if (data.hitData == null) {
               return Container();
             }
+            
       
             // Hit count down state
             if (data.requiresCountdown) {
@@ -71,17 +76,19 @@ class JackpotHitShowScreenHdLedWings extends StatelessWidget {
                 child: const JackpotCountdownVideo());
             }
             
-            final hitId = int.tryParse(data.hitData!['id'].toString()) ?? -1;
-            if (ConfigCustom.defaultJackpotValues.containsKey(hitId)) {
-              data.hitData!['amount'] = ConfigCustom.defaultJackpotValues[hitId];
-              debugPrint('Applied default value ${ConfigCustom.defaultJackpotValues[hitId]} for ID: $hitId');
+            final int hitId = int.tryParse(data.hitData!['id'].toString()) ?? -1;
+            // Read from setting.json
+            final String? defaultValue =
+                JackpotConfigService().getDefaultHotSeatValue(hitId.toString());
+
+            if (defaultValue != null) {
+              data.hitData!['amount'] = defaultValue;
+              debugPrint('Applied default value $defaultValue for ID: $hitId');
             }
-            
-             return JackpotBackgroundVideoHit2080x1560LedWings(
+            return JackpotBackgroundVideoHit2080x1560LedWings(
               id: data.hitData!['id'].toString(),
               number: data.hitData!['machineNumber'].toString(),
-              value: ConfigCustom.defaultJackpotValues.containsKey(hitId) ? ConfigCustom.defaultJackpotValues[hitId].toString() : data.hitData!['amount']
-      
+              value: defaultValue ?? data.hitData!['amount'].toString(),
             );
           },
           

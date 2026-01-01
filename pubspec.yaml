@@ -60,6 +60,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/
     - asset/video_new/
     - assets/config/
     - asset/font/
@@ -71,6 +72,22 @@ flutter:
     - asset/video/led_wings/hit/hit.mp4
     - asset/video/led_vms_2496x264/
     - asset/video/led_stair/
+    - asset/video/led_atm/
+    - asset/video/led_curved/
+    - asset/video/led_custom_tripledaily/
+    - asset/video/led_floor2/
+    - asset/video/led_floor3_mega/
+    - asset/video/led_floor3_mega_back/
+    - asset/video/led_lobby/
+    - asset/video/led_marx/
+    - asset/video/led_non_smoke/
+    - asset/video/led_rl_floor2/
+    - asset/video/led_stair/
+    - asset/video/led_wings/
+    - asset/video/led_vms_2496x264/
+    - asset/video/TRIPLE8/
+    - asset/video/count_down/
+
     - asset/video/led_stair/hotseat/
     - asset/video/led_stair/background.mp4
     - asset/video/led_stair/hit.mp4
@@ -150,6 +167,7 @@ flutter:
     - asset/video/led_custom_tripledaily/hotseats/ppochi_slot.mpg
     - asset/video/led_custom_tripledaily/hotseats/ppochi.mp4
     - asset/video/led_custom_tripledaily/hotseats/ppochi_rl.mp4
+    - asset/video/led_custom_tripledaily/hotseats/2026.mp4
 
 
     - asset/video/led_custom_tripledaily/jackpots/countdown.mpg

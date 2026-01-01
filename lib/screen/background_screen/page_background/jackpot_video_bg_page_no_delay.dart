@@ -39,8 +39,8 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
   bool _isSwitching = false;
   int _retryCount = 0;
   static const int _maxRetries = 10;
-  final Media _media1 = Media('asset://${ConfigCustom.videoBackgroundScreenLedStair_1920x1080}');
-  final Media _media2 = Media('asset://${ConfigCustom.videoBackgroundScreenLedStair_1920x1080}');
+  final Media _media1 = Media('asset://${ConfigCustom.videoBackgroundScreenLedFloor2}');
+  final Media _media2 = Media('asset://${ConfigCustom.videoBackgroundScreenLedFloor2}');
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
 
     // Load initial video
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _loadVideo(ConfigCustom.videoBackgroundScreenLedStair_1920x1080);
+      _loadVideo(ConfigCustom.videoBackgroundScreenLedFloor2);
     });
 
     // Handle errors
@@ -72,7 +72,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
         });
         Future.delayed(const Duration(milliseconds: 10), () {
           if (mounted) {
-            _loadVideo(_currentVideoPath ?? ConfigCustom.videoBackgroundScreenLedStair_1920x1080);
+            _loadVideo(_currentVideoPath ?? ConfigCustom.videoBackgroundScreenLedFloor2);
           }
         });
       }
@@ -109,7 +109,7 @@ class _JackpotBackgroundShowNoDelayState extends State<JackpotBackgroundShowNoDe
       await Future.delayed( const Duration(milliseconds: 1500)); // Delay to stabilize libmpv| 1.5s 
 
       _currentVideoPath = videoPath;
-      final media = videoPath == ConfigCustom.videoBackgroundScreenLedStair_1920x1080 ? _media1 : _media2;
+      final media = videoPath == ConfigCustom.videoBackgroundScreenLedFloor2 ? _media1 : _media2;
       await _player.open(media, play: false);
       await _player.setVolume(0.0);
       await _player.play();

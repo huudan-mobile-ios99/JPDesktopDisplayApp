@@ -235,13 +235,13 @@ class JackpotOdometer extends StatelessWidget {
         //   hiveValue: hiveValue,
         //   isSmall: isSmall,
         // );
-        return GameOdometerChildLed1920x1080(
-          startValue: values.startValue,
-          endValue: values.endValue,
-          nameJP: nameJP,
-          hiveValue: hiveValue,
-          isSmall: isSmall,
-        );
+        // return GameOdometerChildLed1920x1080(
+        //   startValue: values.startValue,
+        //   endValue: values.endValue,
+        //   nameJP: nameJP,
+        //   hiveValue: hiveValue,
+        //   isSmall: isSmall,
+        // );
         
           // return GameOdometerChildLed1920x1080Curved(
           //           startValue: values.startValue,
@@ -264,13 +264,13 @@ class JackpotOdometer extends StatelessWidget {
           //           hiveValue: hiveValue,
           //           isSmall: isSmall,
           // );
-        // return GameOdometerChildLed1920x1080Floor2( //BANK END SIDE FLOOR 2 
-        //     startValue: values.startValue,
-        //     endValue: values.endValue,
-        //     nameJP: nameJP,
-        //     hiveValue: hiveValue,
-        //     isSmall: isSmall,
-        // );
+        return GameOdometerChildLed1920x1080Floor2( //BANK END SIDE FLOOR 2 
+            startValue: values.startValue,
+            endValue: values.endValue,
+            nameJP: nameJP,
+            hiveValue: hiveValue,
+            isSmall: isSmall,
+        );
 
         // return RepaintBoundary(
         //   child: GameOdometerChildLed1080x1920Lobby(

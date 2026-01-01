@@ -29,28 +29,28 @@ class JackpotHitShowScreenHdLed1920x1080 extends StatelessWidget {
   // );
 
     //  return const JackpotBackgroundVideoHitLedHD1920x1080MARX(
-    //         id: '109',
+    //         id: '0',
+    //         number: '100',
+    //         value: '10',
+    //   );
+
+//  return const JackpotBackgroundVideoHitLedHD1920x1080StairF(
+//             id: '0',
+//             number: '100',
+//             value: '100',
+//   );
+
+    //  return const JackpotBackgroundVideoHitLedHD1920x1080CurvedF(
+    //         id: '80',
     //         number: '100',
     //         value: '0',
     //   );
 
-//  return const JackpotBackgroundVideoHitLedHD1920x1080StairF(
-//             id: '119',
-//             number: '100',
-//             value: '0',
-//   );
-
-    //  return const JackpotBackgroundVideoHitLedHD1920x1080CurvedF(
-    //         id: '0',
-    //         number: '100',
-    //         value: '1000',
-    //   );
-
 // return const JackpotBackgroundVideoHitLedHD1920x1080ATM(
-//             id: '109',
+//             id: '0',
 //             number: '100',
-//             value: '0',
-//       );
+//             value: '10',
+// );
 //  return  JackpotBackgroundVideoHit1920x1080Floor2(
 //           id: '0',
 //             number: '1111',
@@ -59,9 +59,9 @@ class JackpotHitShowScreenHdLed1920x1080 extends StatelessWidget {
 
 
       // return const JackpotBackgroundVideoHitLedHD1920x1080NonSmoke(
-      //       id: '0',
+      //       id: '124',
       //       number: '1111',
-      //       value: '110',
+      //       value: '0',
       // );
     // JackpotBackgroundVideoHitLedHD1920x1080ATM
 
